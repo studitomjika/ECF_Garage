@@ -1,0 +1,30 @@
+{
+    "car-deal-1":
+    {
+        "model": "PEUGEOT MÔCHE MAIS SOLIDE BLEU EQUIPE DE FRANCE",
+        "year": 2008,
+        "kilometers": 85012,
+        "price": 1250
+    },
+    "car-deal-2":
+    {
+        "model": "RENAUD MÔCHE",
+        "year": 2022,
+        "kilometers": 36140,
+        "price": 1700
+    },
+    "car-deal-3":
+    {
+        "model": "NISSAN MÔCHE",
+        "year": 1999,
+        "kilometers": 45160,
+        "price": 5000
+    },
+    "car-deal-4":
+    {
+        "model": "Ford",
+        "year": 2005,
+        "kilometers": 7654,
+        "price": 10000
+    }
+}

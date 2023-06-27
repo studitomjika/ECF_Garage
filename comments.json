@@ -1,0 +1,30 @@
+{
+    "comment1":
+    {
+        "name": "Jean-Claude Dus",
+        "note": 4,
+        "text": "C'est plus cassé merci.",
+        "accepted": true
+    },
+    "comment2":
+    {
+        "name": "Marie Molette",
+        "note": 2,
+        "text": "Pas trouvé de liquide de clignotant...",
+        "accepted": true
+    },
+    "comment3":
+    {
+        "name": "Johnny",
+        "note": 3,
+        "text": "Pas cher mais j'aurai pu le faire moi-même.",
+        "accepted": true
+    },
+    "comment4":
+    {
+        "name": "Connard",
+        "note": 1,
+        "text": "Arnaqueur comme tous les garagistes...",
+        "accepted": false
+    }
+}
