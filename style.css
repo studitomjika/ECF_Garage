@@ -67,6 +67,7 @@ button, .like-button {
   color: #f2f2f2;
   font-weight: bold;
   text-decoration:none;
+  cursor: pointer;
 }
 
 /* COMMENTS */
@@ -223,7 +224,7 @@ select {
   overflow: auto;
   background-color: rgba(0,0,0,0.4);
 }
-#modal-contact:target, #modal-connect:target, #modal-comment:target {
+.modal.show {
   display: flex;
   justify-content: center;
   opacity: 1;
