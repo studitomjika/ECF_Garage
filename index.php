@@ -12,46 +12,18 @@
 </head>
 
 <body class="row">
+<?php require_once 'hours.php'; require_once 'comments.php'; require_once 'services.php'; require_once 'cardeals_filter.php' ?>
 
   <aside class="flex col">
     <h1>Garage V. Parrot</h1>
     <a href="#modal-connect" class="like-button">Se connecter</a>
     <h2>Horaires d’ouverture</h2>
     <section class="hours">
-      <?php
-      // A charger depuis la base de données
-      $opening_hours = file_get_contents(__DIR__."/hours.json");
-      $opening_hours = json_decode($opening_hours, true);
-
-      foreach($opening_hours as $day => $hours) {
-        if (is_array($hours)) {
-          echo '<p>'.substr($day, 0, 3).'. : '.implode(', ',$hours).'</p>';
-        }
-        else {
-          echo '<p>'.$hours.'</p>';
-        }
-      }
-      ?>
+      <?php getHours(); ?>
     </section>
     <a href="#modal-contact" class="like-button">Contact</a>
     <section class="comments">
-      <?php
-        // A charger depuis la base de données
-        $comments = file_get_contents(__DIR__."/comments.json");
-        $comments = json_decode($comments, true);
-
-        foreach($comments as $comment) {
-          if ( is_array($comment) && $comment['accepted']) {
-            echo "<div class='comment'>";
-            echo "<p class='text'>".$comment['text']."</p>";
-            echo "<div class='flex comment-note'>";
-            echo "<p class='note'>".$comment['note']."/5</p>";
-            echo "<p class='name'>".$comment['name']."</p>";
-            echo "</div>";
-            echo "</div>";
-          }
-        }
-      ?>
+      <?php getComments(); ?>
     </section>
     <a href="#modal-comment" class="like-button">Ajouter un commentaire</a>
   </aside>
@@ -59,22 +31,11 @@
   <main class="flex col wrap">
     <h2>Les services du garages:</h2>
     <section class="services-section flex row wrap">
-      <?php
-        // A charger depuis la base de données
-        $services = file_get_contents(__DIR__."/services.json");
-        $services = json_decode($services, true);
-
-        foreach($services['services'] as $service) {
-            echo "<div class='service'>";
-            echo "<img src='gear.svg' width='24' class='icon' alt='icon service'>";
-            echo "<p>".$service."</p>";
-            echo "</div>";
-          }
-      ?>
+        <?php getServices(); ?>
     </section>
 
     <h2>Les voitures d'occasion à la vente:</h2>
-    <section class="filtres">
+    <form class="filtres" action="cardeals_filter.php" method="post"> <!--//formdata ??-->
       <label for="price-select">Prix</label>
       <select name="price-select" id="price-select">
         <option value="all">Tous les prix</option>
@@ -99,30 +60,10 @@
         <option value="bracket3">2008 à 2014</option>
         <option value="bracket4">2015 à 2023</option>
       </select>
-    </section>
+    </form>
     <section class="car-deals-section flex row wrap">
       <div class="car-deals">
-        <?php
-          // A charger depuis la base de données
-          $carDeals = file_get_contents(__DIR__."/car-deals.json");
-          $carDeals = json_decode($carDeals, true);
-
-          foreach($carDeals as $carDeal) {
-              echo "<div class='car-deal show'>";
-              echo "<div class='photo'>";
-              echo "<a href='#modal-contact' class='deal-contact'>Contact</a>";
-              echo "<img src='https://picsum.photos/id/40/1000/800' alt='' width='100%' height='100%'>";
-              echo "</div>";
-              echo "<div class='twoline'>";
-              echo "<p class='model'>".$carDeal['model']."</p>";
-              echo "</div>";
-              echo "<p class='km'>".$carDeal['kilometers']." km</p>";
-              echo "<p class='year'>".$carDeal['year']."</p>";
-              echo "<p class='price'>".$carDeal['price']." €</p>";
-              echo "</div>";
-            }
-        ?>
-
+        <?php getCarDeals(); ?>
       </div>
     </section>
   </main>

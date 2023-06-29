@@ -7,9 +7,9 @@ function filterSelection(evt) {
   let currentPrice = document.getElementById("price-select").options[document.getElementById("price-select").selectedIndex].value;
   let currentKM = document.getElementById("km-select").options[document.getElementById("km-select").selectedIndex].value;
   let currentYear = document.getElementById("year-select").options[document.getElementById("year-select").selectedIndex].value;
-  //console.log(currentPrice, currentKM, currentYear)
+  console.log(currentPrice, currentKM, currentYear)
   let carDeals = document.getElementsByClassName("car-deal");
-  //console.log(carDeals)
+  console.log(carDeals)
   const carDealsFilteredPrice = [...carDeals].filter(function (carDeal) {
     let priceValue = carDeal.getElementsByClassName("price")[0].innerText.slice(0, -2);
     switch (currentPrice) {
