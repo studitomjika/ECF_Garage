@@ -3,12 +3,11 @@ $PDO = DBconnect();
 
 $CONFIGS = [];
 
-$results = $PDO->query('SELECT * FROM Configurations');
-while ($row = $results->fetchArray()) {
-  $CONFIGS[$row['Name']] = $row['Value'];
-}
+  $results = $PDO->query('SELECT * FROM configurations');
+  while ($row = $results->fetchArray()) {
+    $CONFIGS[$row['name']] = $row['value'];
+  }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,40 +18,44 @@ while ($row = $results->fetchArray()) {
   <title>Garage V. Parrot</title>
   <link href="https://fonts.cdnfonts.com/css/barlow" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/rajdhani" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?<?= time(); ?>"><!--dev only-->
+  <link rel="stylesheet" href="style.css?<?= time(); ?>"><!--dev only for CSS cache reload-->
   <meta name="description" content="">
 </head>
 
 <body class="row">
   <aside class="flex col">
     <a href="index.php"><h1>Garage V. Parrot</h1></a>
-    <a class="like-button open-modal-onclick" data-modal="modal-connect">Se connecter</a>
-    <h2>Horaires d’ouverture</h2>
+    <?php
+        if ( !empty($CONFIGS['formulaire_connect']) ) {
+              echo '<a class="like-button open-modal-onclick" data-modal="modal-connect">Se connecter</a>';
+        }
+      ?>
+    <h2><?= $CONFIGS['titre_horaires']; ?></h2>
     <section class="hours">
       <?php getHours(); ?>
     </section>
-    <?php
-
-if ( !empty($CONFIGS['formulaire_contact']) ) {
-       echo '<a class="like-button open-modal-onclick" data-modal="modal-contact">Contact</a>';
-}
-
-?>
-
+      <?php
+        if ( !empty($CONFIGS['formulaire_contact']) ) {
+              echo '<a class="like-button open-modal-onclick" data-modal="modal-contact">Contact</a>';
+        }
+      ?>
     <section class="comments">
       <?php getComments(); ?>
     </section>
-    <a class="like-button open-modal-onclick" data-modal="modal-comment">Ajouter un commentaire</a>
+    <?php
+        if ( !empty($CONFIGS['formulaire_comment']) ) {
+              echo '<a class="like-button open-modal-onclick" data-modal="modal-comment">Ajouter un commentaire</a>';
+        }
+      ?>
   </aside>
 
   <main class="flex col wrap">
-    <h2>Les services du garages:</h2>
+    <h2><?= $CONFIGS['titre_services']; ?></h2>
     <section class="services-section flex row wrap">
         <?php getServices(); ?>
     </section>
 
-    <h2>Les voitures d'occasion à la vente:</h2>
-    <h2><?php echo $CONFIGS['titre_voitures']; ?></h2>
+    <h2><?= $CONFIGS['titre_voitures']; ?></h2>
     <form class="filtres" action="cardeals_filter.php" method="post"> <!--//formdata ??-->
       <label for="price-select">Prix</label>
       <select name="price-select" id="price-select">
@@ -86,78 +89,17 @@ if ( !empty($CONFIGS['formulaire_contact']) ) {
     </section>
   </main>
 
-  <div id="modal-connect" class="modal">
-    <div>
-      <div class="modal-form">
-        <a class="close">&times;</a>
-        <h2>Contacter le garage</h2>
-        <form action="connect.php" method="post">
-
-          <label for="login">Login</label>
-          <input type="text" id="login" name="login" placeholder="Votre mail">
-      
-          <label for="password">Mot de passe</label>
-          <input type="password" id="password" name="password" placeholder="Votre mot de passe">
-      
-          <input type="submit" value="Se connecter" class="like-button">
-      
-        </form>
-      </div>
-    </div>
-  </div>
-
   <?php
-
-  if ( !empty($CONFIGS['formulaire_contact']) ) {
-    include "contactForm.php";
-  }
-
+    if ( !empty($CONFIGS['formulaire_connect']) ) {
+      include "connectForm.php";
+    }
+    if ( !empty($CONFIGS['formulaire_contact']) ) {
+      include "contactForm.php";
+    }
+    if ( !empty($CONFIGS['formulaire_comment']) ) {
+      include "commentForm.php";
+    }
   ?>
-
-
-  <div id="modal-comment" class="modal">
-    <div>
-      <div class="modal-form">
-        <a class="close">&times;</a>
-        <h2>Ajouter un commentaire</h2>
-        <form action="comment.php" class="">
-
-          <label for="name">Nom</label>
-          <input type="text" id="name" name="name" placeholder="Votre nom">
-      
-          <label for="message">Message</label>
-          <textarea id="message" name="message" placeholder="Votre commentaire" style="height:200px"></textarea>
-      
-          <label for="note">Note</label>
-          <div class="flex row note-radio">
-            <div>
-              <input type="radio" id="note-1" name="note" Value="1">
-              <label for="note-1">1</label>
-            </div>
-            <div>
-              <input type="radio" id="note-2" name="note" Value="2">
-              <label for="note-2">2</label>
-            </div>
-            <div>
-              <input type="radio" id="note-3" name="note" Value="3">
-              <label for="note-3">3</label>
-            </div>
-            <div>
-              <input type="radio" id="note-4" name="note" Value="4">
-              <label for="note-4">4</label>
-            </div>
-            <div>
-              <input type="radio" id="note-5" name="note" Value="5">
-              <label for="note-5">5</label>
-            </div>
-          </div>
-
-          <input type="submit" value="Envoyer" class="like-button">
-      
-        </form>
-      </div>
-    </div>
-  </div>
 
   <script src="filters.js" type="text/javascript"></script>
   <script src="modals.js" type="text/javascript"></script>
