@@ -32,10 +32,10 @@ $formComment_message = "";
   }
 
   if( $formComment_send && !$formComment_error ) {
-    echo '<div id="modal-comment-succes" class="modal show"><div>';
+    echo '<div id="modal-comment-success" class="modal show"><div>';
     echo '<div class="modal-form">';
     echo '<a class="close close-modal-onclick">&times;</a>';
-    echo '<p class="form-success"> Formulaire envoyé.</p>';
+    echo '<p class="form-success">Formulaire envoyé.</p>';
     echo '</div></div></div>';
   }
 ?>
