@@ -4,72 +4,70 @@ $formConnect_send = false;
 $formConnect_error = false;
 $formConnect_message = "";
 
-if ( isset($_GET['formConnect']) ) {
-  $formConnect_send = true;
-  $formConnect_error = false;
+  if ( isset($_POST['formConnect']) ) {
+    
+    $formConnect_send = true;
+    $formConnect_error = false;
+    
+    //header('Location: https://google.com');
 
-  $email = $_GET['email'];
-  $password = $_GET['password'];
+    $email = $_POST['login'];
+    $password = $_POST['password'];
 
-  /*test verification data*/
+    $query = "SELECT * FROM employees WHERE login = :email";
+    $PDOstmt = $PDO->prepare($query);
+    $PDOstmt->bindValue(':email', $email);
+    
+    $result = $PDOstmt->execute();
 
-  /*test verification data*/
-  /*$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-  $inputs['email'] = $email;
-
-  $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
-  $inputs['password'] = $password;*/
-
-  $query = "SELECT * FROM employees WHERE login = :mail";
-  $PDOstmt = $PDO->prepare($query);
-  $PDOstmt->bindValue(':mail', $mail);
-
-  if ( $PDOstmt->execute() ) {
-    $formConnect_message = '<p class="form-success"> Formulaire envoyé.</p>';
-
-    $user = $statement->fetch(PDO::FETCH_ASSOC);
-    if ($user === false) {
-        // Si aucun utilisateur ne correspond au login entré, on affiche une erreur
-        alert( 'Identifiants invalides');
+    if ( !$result->numColumns() ) {
+      $formConnect_error = true;
+      $formConnect_message = '<p class="form-fail">Identifiants érronés.</p>';
     } else {
-        // On vérifie le hash du password
-        if (password_verify('$password', $user['password'])) {
-          alert( 'Bienvenue '.$user['firstname']);
-        } else {
-          alert( 'Identifiants invalides');
-        }
+
+      $user = $result->fetchArray(SQLITE3_ASSOC);
+
+      if ( $user['password'] != $password ) {
+        /*if (password_verify('$password', $user['password']))*/
+        $formConnect_error = true;
+        $formConnect_message = '<p class="form-fail">Identifiants érronés.</p>';
+      }
     }
   }
-  else {
-    $formConnect_message = '<p class="form-fail">Erreur de formulaire.</p>';
-    alert('Impossible de récupérer l\'utilisateur');
-  }
-}
 
+  if( $formConnect_send && !$formConnect_error ) {
+    echo 'header ready';
+    /*header("Location: http://www.google.com");
+    exit;*/
+    echo '<script>window.location="admin.php"</script>';
+  }
+  
 ?>
 
-<div id="modal-connect" class="modal<?php if( $formConnect_send ) { echo ' show'; } ?>">
-    <div>
-      <div class="modal-form">
-        <a class="close close-modal-onclick">&times;</a>
-        <h2><?= $CONFIGS['titre_form_connect']; ?></h2>
-        <form action="index.php" method="post">
+<div id="modal-connect" class="modal<?php if( $formConnect_send && $formConnect_error) { echo ' show'; } ?>">
+  <div>
+    <div class="modal-form">
+      <a class="close close-modal-onclick">&times;</a>
+      <h2><?= $CONFIGS['titre_form_connect']; ?></h2>
 
-          <label for="login">Login</label>
-          <input type="email" required id="login" name="login" placeholder="Votre mail">
-      
-          <label for="password">Mot de passe</label>
-          <input type="password" required id="password" name="password" placeholder="Votre mot de passe">
-      
-          <?php
-            if ( !empty($formConnect_message) ) {
-              echo $formConnect_message;
-            }
-          ?>
+      <form action="index.php" method="post">
+        <input type="hidden" name="formConnect" value=1><!--pour vérifier que le form est bien envoyé-->
 
-          <input type="submit" value="Se connecter" class="like-button">
-      
-        </form>
-      </div>
+        <label for="login">Login</label>
+        <input type="email" required id="login" name="login" placeholder="Votre mail">
+    
+        <label for="password">Mot de passe</label>
+        <input type="password" required id="password" name="password" placeholder="Votre mot de passe">
+    
+        <?php
+          if ( !empty($formConnect_message) ) {
+            echo $formConnect_message;
+          }
+        ?>
+
+        <input type="submit" value="Se connecter" class="like-button">
+    
+      </form>
     </div>
   </div>
+</div>

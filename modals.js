@@ -1,6 +1,7 @@
 document.querySelectorAll(".open-modal-onclick").forEach(el => {
   el.addEventListener("click", (evt) => {
     let idModal = el.getAttribute("data-modal");
+    console.log("idModal:", idModal)
     document.querySelector("#"+idModal).classList.add("show");
     evt.preventDefault();
   })
@@ -8,6 +9,10 @@ document.querySelectorAll(".open-modal-onclick").forEach(el => {
 
 document.querySelectorAll(".close-modal-onclick").forEach(el => {
   el.addEventListener("click", (evt) => {
+
+    let formFailElement = document.querySelector("#modal-connect .form-fail")
+    if(formFailElement) formFailElement.remove()
+    
     document.querySelectorAll(".modal").forEach(el => {
         el.classList.remove('show');
     })
@@ -15,6 +20,7 @@ document.querySelectorAll(".close-modal-onclick").forEach(el => {
     evt.preventDefault();
   })
 });
+
 
 var emailConnect = document.getElementById("login");
 emailConnect.addEventListener("keyup", function (event) {
