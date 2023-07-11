@@ -111,6 +111,7 @@ function getHours()
       echo "<p class='km'>".$carDeal['kilometres']." km</p>";
       echo "<p class='year'>".$carDeal['year']."</p>";
       echo "<p class='price'>".$carDeal['price']." €</p>";
+      echo "<p class='id_car_deal hidden'>".$carDeal['id_occasion']."</p>";
       echo "</div>";
     }
   }

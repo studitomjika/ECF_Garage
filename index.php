@@ -37,7 +37,7 @@ $CONFIGS = [];
     </section>
       <?php
         if ( !empty($CONFIGS['formulaire_contact']) ) {
-          echo '<a class="like-button open-modal-onclick" data-modal="modal-contact">Contact</a>';
+          echo '<a class="like-button open-modal-onclick contact-generic" data-modal="modal-contact">Contact</a>';
         }
       ?>
     <section class="comments">

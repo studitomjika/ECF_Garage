@@ -257,6 +257,10 @@ input[type=submit] {
   cursor: pointer;
   font-size: medium;
 }
+input[disabled=disabled] {
+  background-color: lightgray;
+  color: black;
+}
 .note-radio {
   justify-content: space-around;
 }
@@ -296,6 +300,9 @@ input[type=submit] {
 }
 .col {
 	flex-direction: column;
+}
+.hidden {
+  display: none;
 }
 
 @media screen and (max-width: 650px) {
