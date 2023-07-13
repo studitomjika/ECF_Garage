@@ -1,8 +1,8 @@
 <?php
 
-ini_set('display_errors', 1);
+/*ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+error_reporting(E_ALL);*/
 
 function DBconnect()
 {
@@ -107,7 +107,8 @@ function getHours()
         echo '<a class="like-button open-modal-onclick deal-contact" data-modal="modal-contact">Contact</a>';
       }
       //echo "<a href='#modal-contact' class='deal-contact'>Contact</a>";
-      echo "<img src='https://picsum.photos/id/40/1000/800' alt='' width='100%' height='100%'>";
+      //echo "<img src='https://picsum.photos/id/40/1000/800' alt='' width='100%' height='100%'>";
+      echo "<img src='".$carDeal['picture_link']."' alt='' width='100%' height='100%'>";
       echo "</div>";
       echo "<div class='twoline'>";
       echo "<p class='model'>".$carDeal['model']."</p>";
