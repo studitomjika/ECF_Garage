@@ -26,7 +26,7 @@ $formConnect_message = "";
 
       if ( !$user || !password_verify($password, $user['password'])) {
         $formConnect_error = true;
-        $formConnect_message = '<p class="form-fail">Identifiants érronés.</p>';
+        $formConnect_message = '<p class="form-fail">Identifiants erronés.</p>';
       } else {
         $_SESSION["id_user"] = $user["id_employee"];
       }
