@@ -12,13 +12,6 @@ $formComment_message = "";
     $message = $_POST['message'];
     $note = $_POST['note'];
 
-    /*test verification data*/
-    /*$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
-    $inputs['name'] = $name;
-
-    $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_SPECIAL_CHARS);
-    $inputs['message'] = $message;*/
-
     $query = "INSERT INTO comments (message, grade, name) VALUES (:message, :note, :name)";
     $PDOstmt = $PDO->prepare($query);
     $PDOstmt->bindValue(':name', $name);
@@ -46,8 +39,8 @@ $formComment_message = "";
         <a class="close close-modal-onclick">&times;</a>
         <h2><?= $CONFIGS['titre_form_comment']; ?></h2>
 
-        <form action="index.php" method="post"><!--TODO post en prod-->
-          <input type="hidden" name="formComment" value=1><!--pour vérifier que le form est bien envoyé-->
+        <form action="index.php" method="post">
+          <input type="hidden" name="formComment" value=1>
 
           <label for="name">Nom</label>
           <input type="text" required id="name" name="name" placeholder="Votre nom"  value="<?php if( $formComment_error ) { echo $_POST['name']; } ?>">
@@ -56,7 +49,7 @@ $formComment_message = "";
           <textarea id="message" required name="message" placeholder="Votre commentaire" style="height:200px"><?php if( $formComment_error ) { echo $_POST['message']; } ?></textarea>
       
           <label for="note">Note</label>
-          <div class="flex row note-radio"><!--TODO boucle d'echo-->
+          <div class="flex row note-radio">
             <div>
               <input type="radio" required id="note-1" name="note" value="1" <?php if( $formComment_error && $_POST['note'] == '1') { echo 'checked'; } ?>>
               <label for="note-1">1</label>

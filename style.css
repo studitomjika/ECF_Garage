@@ -6,6 +6,7 @@ body {
 	--red: #d92332;
   font-family: "Barlow", sans-serif;
   display: flex;
+  flex-direction: row;
   margin: 0px 15%;
 }
 
@@ -14,14 +15,6 @@ html, body {
 	color: var(--black);
 	font-family: "Barlow", sans-serif;
 	line-height: 2.5ch;
-}
-
-aside {
-  /*border: 1px saddlebrown solid;*/
-}
-
-main {
-  /*border: 1px solid var(--black);*/
 }
 
 h1 {/*good referencement*/
@@ -71,8 +64,6 @@ button, .like-button {
 }
 
 /* COMMENTS */
-.comments {
-}
 .comment {
   margin-top: 25px;
   box-shadow: 2px 4px 10px #d9777f1a;
@@ -106,7 +97,7 @@ button, .like-button {
   align-items: center;
 	justify-content: start;
   height: 40px;
-  margin: 15px;
+  margin: 15px 15px 15px 0px;
   background-color: var(--pink);
 }
 .service > p {
@@ -116,7 +107,6 @@ button, .like-button {
   color: var(--white)
 }
 .service > img {
-  /*border: 1px solid var(--black);*/
   margin-left: 5px;
 }
 
@@ -128,6 +118,8 @@ select {
   font-size: 0.85em;
   cursor: pointer;
   background-image: linear-gradient(to top, var(--white), var(--white) 33%);
+  min-width: 175px;
+  max-width: 175px;
 }
 
 /* CAR DEALS */
@@ -143,30 +135,24 @@ select {
 .car-deal > p {
   margin: 0px;
   padding: 5px 0px 10px 10px;
-  /*border: 1px solid #262526;*/
 }
 .car-deal:hover {
   box-shadow: 2px 4px 10px #d9777f99;
 }
 .car-deals-section {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 .filtres {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.car-deals {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
 .car-deal .photo {
   position: relative;
-  /*border: 1px solid black;*/
   max-height: 50%;
   overflow: hidden;
 }
@@ -202,6 +188,7 @@ select {
   text-align: left;
   font-size: large;
   font-weight: bold;
+  height: 44px;
 }
 .price {
   text-align: right;
@@ -235,7 +222,7 @@ select {
   padding: 20px 25px 20px 25px;
   border: 1px solid var(--black);
   width: 400px;
-  overflow:auto; 
+  overflow: auto;
 }
 form {
   display: flex;
@@ -256,6 +243,10 @@ input[type=text], input[type=email], input[type=tel], input[type=password], sele
 input[type=submit] {
   cursor: pointer;
   font-size: medium;
+}
+input[disabled=disabled] {
+  background-color: lightgray;
+  color: black;
 }
 .note-radio {
   justify-content: space-around;
@@ -285,7 +276,6 @@ input[type=submit] {
 .flex {
 	display: flex;
 	align-items: center;
-  /*justify-content: center;*/
 	align-content: start;
 }
 .wrap {
@@ -296,4 +286,37 @@ input[type=submit] {
 }
 .col {
 	flex-direction: column;
+}
+.hidden {
+  display: none;
+}
+
+@media screen and (max-width: 650px) {
+  body {
+    flex-direction: column;
+  }
+
+  .services-section {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .services-section .service {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 468px) {
+  .car-deals-section {
+    justify-content: center;
+  }
+
+  .filtres > div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal div {
+    width: 92.5%;
+  }
 }
