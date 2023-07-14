@@ -1,8 +1,8 @@
 document.querySelectorAll(".open-modal-onclick").forEach(el => {
   el.addEventListener("click", (evt) => {
     let idModal = el.getAttribute("data-modal")
-    console.log("idModal:", idModal)
     document.querySelector("#"+idModal).classList.add("show")
+
     evt.preventDefault()
   })
 });

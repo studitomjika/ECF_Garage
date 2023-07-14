@@ -9,8 +9,6 @@ $formConnect_message = "";
     $formConnect_send = true;
     $formConnect_error = false;
     
-    //header('Location: https://google.com');
-
     $email = $_POST['login'];
     $password = $_POST['password'];
 
@@ -48,7 +46,7 @@ $formConnect_message = "";
       <h2><?= $CONFIGS['titre_form_connect']; ?></h2>
 
       <form action="index.php" method="post">
-        <input type="hidden" name="formConnect" value=1><!--pour vérifier que le form est bien envoyé-->
+        <input type="hidden" name="formConnect" value=1>
 
         <label for="login">Login</label>
         <input type="email" required id="login" name="login" placeholder="Votre mail">

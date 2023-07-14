@@ -4,7 +4,6 @@ function addService () {
   const textService = document.getElementById("new-service").value
   let formTextService = document.getElementById("add-service-input")
   formTextService.setAttribute("value", textService)
-  console.log(formTextService)
 
   document.servicesFormAdd.submit()
 }
@@ -18,12 +17,9 @@ function deleteService (event) {
   const idNumber = event.target.id.split('-')[tSize - 1]
   let formIdService = document.getElementById("delete-service-input")
   formIdService.setAttribute("value", idNumber)
-  console.log(formIdService)
 
   document.servicesFormDelete.submit()
 }
-
-
 
 document.getElementsByName("update-service-btn").forEach((update_btn) => {
   update_btn.onclick = updateService

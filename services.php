@@ -14,7 +14,6 @@ $formServices_message = "";
     $formServices_error = false;
     
     $serviceText = $_POST['add-service-input'];
-    echo $serviceText;
 
     $query = "INSERT INTO services (text) VALUES (:text_service)";
     
@@ -22,11 +21,9 @@ $formServices_message = "";
     $PDOstmt->bindValue(':text_service', $serviceText);
   
     if ( !$PDOstmt->execute() ) {
-      //var_dump($PDOstmt->errorInfo());
       $formServices_error = true;
       $formServices_message = '<p class="form-fail">Erreur de formulaire.</p>';
     }
-    echo 'là';
   }
 
   if ( isset($_POST['formDelete']) ) {
@@ -34,7 +31,6 @@ $formServices_message = "";
     $formServices_error = false;
     
     $serviceId = $_POST['delete-service-input'];
-    echo $serviceId;
 
     $query = "DELETE FROM services WHERE id_service=:service_id";
     
@@ -42,11 +38,9 @@ $formServices_message = "";
     $PDOstmt->bindValue(':service_id', $serviceId);
   
     if ( !$PDOstmt->execute() ) {
-      var_dump($PDOstmt->errorInfo());
       $formServices_error = true;
       $formServices_message = '<p class="form-fail">Erreur de formulaire.</p>';
     }
-    echo 'là';
   }
 
   if ( isset($_POST['formUpdate']) ) {
@@ -55,7 +49,6 @@ $formServices_message = "";
     
     $serviceText = $_POST['update-service-input'];
     $serviceId = $_POST['update-service-id'];
-    echo $serviceId." ".$serviceText;
 
     $query = "UPDATE services SET text = :service_text WHERE id_service=:service_id";
     
@@ -64,11 +57,9 @@ $formServices_message = "";
     $PDOstmt->bindValue(':service_id', $serviceId);
   
     if ( !$PDOstmt->execute() ) {
-      var_dump($PDOstmt->errorInfo());
       $formServices_error = true;
       $formServices_message = '<p class="form-fail">Erreur de formulaire.</p>';
     }
-    echo ' là';
   }
   
   if( $formServices_send && !$formServices_error ) {

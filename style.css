@@ -17,14 +17,6 @@ html, body {
 	line-height: 2.5ch;
 }
 
-aside {
-  /*border: 1px saddlebrown solid;*/
-}
-
-main {
-  /*border: 1px solid var(--black);*/
-}
-
 h1 {/*good referencement*/
   margin: 0;
   width: 250px;
@@ -72,8 +64,6 @@ button, .like-button {
 }
 
 /* COMMENTS */
-.comments {
-}
 .comment {
   margin-top: 25px;
   box-shadow: 2px 4px 10px #d9777f1a;
@@ -117,7 +107,6 @@ button, .like-button {
   color: var(--white)
 }
 .service > img {
-  /*border: 1px solid var(--black);*/
   margin-left: 5px;
 }
 
@@ -146,7 +135,6 @@ select {
 .car-deal > p {
   margin: 0px;
   padding: 5px 0px 10px 10px;
-  /*border: 1px solid #262526;*/
 }
 .car-deal:hover {
   box-shadow: 2px 4px 10px #d9777f99;
@@ -165,7 +153,6 @@ select {
 }
 .car-deal .photo {
   position: relative;
-  /*border: 1px solid black;*/
   max-height: 50%;
   overflow: hidden;
 }
@@ -289,7 +276,6 @@ input[disabled=disabled] {
 .flex {
 	display: flex;
 	align-items: center;
-  /*justify-content: center;*/
 	align-content: start;
 }
 .wrap {

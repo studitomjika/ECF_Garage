@@ -3,13 +3,11 @@ document.getElementById("km-select").onchange = filterSelection;
 document.getElementById("year-select").onchange = filterSelection;
 
 function filterSelection(evt) {
-  //var val = this.value;
   const currentPrice = document.getElementById("price-select").options[document.getElementById("price-select").selectedIndex].value;
   const currentKM = document.getElementById("km-select").options[document.getElementById("km-select").selectedIndex].value;
   const currentYear = document.getElementById("year-select").options[document.getElementById("year-select").selectedIndex].value;
-  console.log(currentPrice, currentKM, currentYear)
   const carDeals = document.getElementsByClassName("car-deal");
-  console.log(carDeals)
+  
   const carDealsFilteredPrice = [...carDeals].filter(function (carDeal) {
     let priceValue = carDeal.getElementsByClassName("price")[0].innerText.slice(0, -2);
     switch (currentPrice) {
@@ -25,7 +23,7 @@ function filterSelection(evt) {
         return true;
     }
   });
-  console.log(carDealsFilteredPrice)
+  
   const carDealsFilteredKM = carDealsFilteredPrice.filter(function (carDeal) {
     let kmValue = carDeal.getElementsByClassName("km")[0].innerText.slice(0, -3);
     switch (currentKM) {
@@ -41,7 +39,7 @@ function filterSelection(evt) {
         return true;
     }
   });
-  console.log(carDealsFilteredKM)
+  
   const carDealsFilteredYear = carDealsFilteredKM.filter(function (carDeal) {
     let yearValue = carDeal.getElementsByClassName("year")[0].innerText;
     switch (currentYear) {
@@ -57,7 +55,7 @@ function filterSelection(evt) {
         return true;
     }
   });
-  console.log(carDealsFilteredYear)
+  
   for (const element of carDeals)
     RemoveShowClass(element, "show");
 

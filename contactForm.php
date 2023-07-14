@@ -15,19 +15,6 @@ $formContact_message = "";
     $message = $_POST['message'];
     $id_car_deal = $_POST['id_car_deal'];
 
-    /*test verification data*/
-    /*$firstname = filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING);
-    $inputs['firstname'] = $firstname;
-
-    $mail = filter_input(INPUT_POST, 'mail', FILTER_SANITIZE_EMAIL);
-    $inputs['mail'] = $mail;
-
-    $tel = filter_input(INPUT_POST, 'tel', FILTER_SANITIZE_INT);
-    $inputs['tel'] = $tel;
-
-    $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_SPECIAL_CHARS);
-    $inputs['message'] = $message;*/
-
     $query = "INSERT INTO messages (name, email, phone_number, subject, message, id_occasion) VALUES (:firstname, :mail, :tel, :subject, :message, :id_car_deal)";
     $PDOstmt = $PDO->prepare($query);
     $PDOstmt->bindValue(':firstname', $firstname);
@@ -58,8 +45,8 @@ $formContact_message = "";
     <a class="close close-modal-onclick">&times;</a>
     <h2><?= $CONFIGS['titre_form_contact']; ?></h2>
 
-    <form action="index.php" method="post"><!--TODO post en prod-->
-      <input type="hidden" name="formContact" value=1><!--pour vérifier que le form est bien envoyé-->
+    <form action="index.php" method="post">
+      <input type="hidden" name="formContact" value=1>
 
       <label for="name">Nom et prénom</label>
       <input type="text" id="firstname" name="firstname" placeholder="Votre nom" value="<?php if( $formContact_error ) { echo $_POST['firstname']; } ?>">

@@ -1,10 +1,10 @@
 <?php require_once 'functions.php';
 
-session_start();
+  session_start();
 
-$PDO = DBconnect();
+  $PDO = DBconnect();
 
-$CONFIGS = [];
+  $CONFIGS = [];
 
   $results = $PDO->query('SELECT * FROM configurations');
   while ($row = $results->fetchArray()) {
@@ -47,20 +47,21 @@ $CONFIGS = [];
   <aside class="flex col">
     <a href="index.php"><h1>Garage V. Parrot</h1></a>
     <?php
-    if( !isset($_SESSION['id_user'])) {
-        if ( !empty($CONFIGS['formulaire_connect']) ) {
-          echo '<a class="like-button open-modal-onclick" data-modal="modal-connect">Se connecter</a>';
-        }
-    } else {
-      ?>
-        <form action="index.php" method="post">
-          <input type="submit" class="like-button" value="Deconnexion"/>
-          <input type="hidden" name="disconnect" value="1"/>
-        </form>
-        <a href="admin.php" class="like-button">Administration</a>
-      <?php
-    }
-      ?>
+      if( !isset($_SESSION['id_user'])) {
+          if ( !empty($CONFIGS['formulaire_connect']) ) {
+            echo '<a class="like-button open-modal-onclick" data-modal="modal-connect">Se connecter</a>';
+          }
+      } else {
+    ?>
+      <form action="index.php" method="post">
+        <input type="submit" class="like-button" value="Deconnexion"/>
+        <input type="hidden" name="disconnect" value="1"/>
+      </form>
+      <a href="admin.php" class="like-button">Administration</a>
+    <?php
+      }
+    ?>
+
     <h2><?= $CONFIGS['titre_horaires']; ?></h2>
     <section class="hours">
       <?php getHours(); ?>
@@ -70,6 +71,7 @@ $CONFIGS = [];
           echo '<a class="like-button open-modal-onclick contact-generic" data-modal="modal-contact">Contact</a>';
         }
       ?>
+
     <section class="comments">
       <?php getComments(); ?>
     </section>
@@ -87,7 +89,7 @@ $CONFIGS = [];
     </section>
 
     <h2><?= $CONFIGS['titre_voitures']; ?></h2>
-    <form class="filtres flex row wrap" action="cardeals_filter.php" method="post"> <!--//formdata ??-->
+    <form class="filtres flex row wrap" action="cardeals_filter.php" method="post">
       <div>
         <label for="price-select">Prix</label>
         <select name="price-select" id="price-select">

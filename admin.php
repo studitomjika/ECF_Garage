@@ -82,8 +82,3 @@ form {
 <script src="services.js" type="text/javascript"></script>
 </body>
 </html>
-
-
-<!--listez les sevices dans un tableau avec bouton pour supprimez,
-un champ + bouton pour ajouter un service
-une action = un formuaire-->
