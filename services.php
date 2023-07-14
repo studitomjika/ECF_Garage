@@ -1,4 +1,7 @@
-<?php require_once 'functions.php';
+<?php
+require_once 'security.php';
+require_once 'functions.php';
+
 $PDO = DBconnect();
 global $PDO;
 

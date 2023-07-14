@@ -1,4 +1,6 @@
-<?php require_once 'functions.php';
+<?php 
+require_once 'security.php';
+require_once 'functions.php';
 $PDO = DBconnect();
 global $PDO;
 
@@ -23,7 +25,7 @@ echo '<th>Delete</th>';
 echo '</tr>';
 
 foreach ($services as $service) { ?>
-  <tr>
+  <tr>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
     <td><?=$service['id_service']?></td>
     <td><input type="text" id="service-text-<?=$service['id_service']?>" class="update-input input-readonly" disabled value="<?=$service['text']?>"/></td>
     <td><button type="button" name="update-service-btn" id="update-service-btn-<?=$service['id_service']?>">Update</button></td>

@@ -20,26 +20,23 @@ $formConnect_message = "";
     
     $result = $PDOstmt->execute();
 
-    if ( !$result->numColumns() ) {
+    if( !$result ) {
       $formConnect_error = true;
-      $formConnect_message = '<p class="form-fail">Identifiants érronés.</p>';
+      $formConnect_message = '<p class="form-fail">Erreur technique.</p>';
     } else {
-
       $user = $result->fetchArray(SQLITE3_ASSOC);
 
-      if ( $user['password'] != $password ) {
-        /*if (password_verify('$password', $user['password']))*/
+      if ( !$user || !password_verify($password, $user['password'])) {
         $formConnect_error = true;
         $formConnect_message = '<p class="form-fail">Identifiants érronés.</p>';
+      } else {
+        $_SESSION["id_user"] = $user["id_employee"];
       }
     }
   }
 
   if( $formConnect_send && !$formConnect_error ) {
-    echo 'header ready';
-    /*header("Location: http://www.google.com");
-    exit;*/
-    echo '<script>window.location="admin.php"</script>';
+    echo '<script>window.location="index.php"</script>';
   }
   
 ?>
