@@ -1,6 +1,6 @@
 # ECF_Garage
 
-## Éxecution en local ##
+## Éxecution en local (Linux) ##
 
 ### Installer Apache2 ###
 
@@ -66,7 +66,7 @@ Relancez Apache :
 > sudo systemctl restart apache2
 
 ### Création d'un administrateur à la BDD ###
-En utilisant le logiciel SQLite, la commande suivante ajoute un employé avec le rôle d'administrateur. Le hash du mot de passe peut être généré grâce à https://www.bcrypt.fr/
+En utilisant le logiciel SQLiteStudio, la commande suivante ajoute un employé avec le rôle d'administrateur. Le hash du mot de passe peut être généré grâce à https://www.bcrypt.fr/
 
 > INSERT INTO employees(name, firstname, login, password, role_admin) VALUES('[firstname]', '[name]', '[email]', '[hash]', 1);
 
