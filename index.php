@@ -1,5 +1,7 @@
 <?php require_once 'functions.php';
 
+session_start();
+
 $PDO = DBconnect();
 
 $CONFIGS = [];
@@ -8,6 +10,11 @@ $CONFIGS = [];
   while ($row = $results->fetchArray()) {
     $CONFIGS[$row['name']] = $row['value'];
   }
+
+  if( isset($_POST['disconnect'])) {
+    session_unset();
+  }
+
 ?>
 
 <!DOCTYPE html>
@@ -24,12 +31,35 @@ $CONFIGS = [];
 </head>
 
 <body>
+
+  <?php
+    if ( !empty($CONFIGS['formulaire_connect']) ) {
+      include "connectForm.php";
+    }
+    if ( !empty($CONFIGS['formulaire_contact']) ) {
+      include "contactForm.php";
+    }
+    if ( !empty($CONFIGS['formulaire_comment']) ) {
+      include "commentForm.php";
+    }
+  ?>
+
   <aside class="flex col">
     <a href="index.php"><h1>Garage V. Parrot</h1></a>
     <?php
+    if( !isset($_SESSION['id_user'])) {
         if ( !empty($CONFIGS['formulaire_connect']) ) {
           echo '<a class="like-button open-modal-onclick" data-modal="modal-connect">Se connecter</a>';
         }
+    } else {
+      ?>
+        <form action="index.php" method="post">
+          <input type="submit" class="like-button" value="Deconnexion"/>
+          <input type="hidden" name="disconnect" value="1"/>
+        </form>
+        <a href="admin.php" class="like-button">Administration</a>
+      <?php
+    }
       ?>
     <h2><?= $CONFIGS['titre_horaires']; ?></h2>
     <section class="hours">
@@ -93,18 +123,6 @@ $CONFIGS = [];
         <?php getCarDeals(); ?>
     </section>
   </main>
-
-  <?php
-    if ( !empty($CONFIGS['formulaire_connect']) ) {
-      include "connectForm.php";
-    }
-    if ( !empty($CONFIGS['formulaire_contact']) ) {
-      include "contactForm.php";
-    }
-    if ( !empty($CONFIGS['formulaire_comment']) ) {
-      include "commentForm.php";
-    }
-  ?>
 
   <script src="filters.js" type="text/javascript"></script>
   <script src="modals.js" type="text/javascript"></script>
