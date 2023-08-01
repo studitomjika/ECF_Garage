@@ -21,7 +21,11 @@ error_reporting(E_ALL);
     array_push($opening_hours, $row);
   }
 
-  DBdisconnect();
+  $results = $PDO->query('SELECT * FROM comments');
+  $comments = [];
+  while ($row = $results->fetchArray()) {
+    array_push($comments, $row);
+  }
 
   echo '<h1>page admin V. Parrot</h1>';
   echo '<h2>Editer les services</h2>';
@@ -50,6 +54,7 @@ error_reporting(E_ALL);
   echo '</tr>';
   echo '</table>';
 
+
   echo '<h2>Editer les horaires</h2>';
 
   echo '<table>';
@@ -71,6 +76,27 @@ error_reporting(E_ALL);
   echo '<tr>';
   echo '</tr>';
   echo '</table>';
+
+
+  echo '<h2>Valider les commentaires</h2>';
+
+  foreach($comments as $comment) {
+    if ( is_array($comment) ) {
+      echo "<div class='comment'>";
+      echo "<p>Commentaire: ".$comment['message']."</p>";
+      echo "<p>Note: ".$comment['grade']."/5</p>";
+      echo "<p>De: ".$comment['name']."</p>";
+      echo "</div>";
+      ?>
+      <input type="checkbox" name="comment_cb" id="comment-<?=$comment['id_commentaire']?>" class="update-input" <?= $comment['accepted'] == 1 ? "checked" : ""?>/>
+      <label>Commentaire accepté</label>
+      <?php
+    }
+  }
+  ?>
+    <br><button type="button" name="validate-comments-btn" id="validate-comments-btn" class="update-input">Valider les commentaires</button>
+  <?php
+  DBdisconnect();
 ?>
 
 <!DOCTYPE html>
@@ -88,6 +114,14 @@ form {
   color: black;
   border: none;
 }
+/* COMMENTS */
+.comment {
+  margin-top: 25px;
+  padding-bottom: 10px;
+  border: 1px solid black;
+  width: 20vw;
+}
+
 </style>
 
 <body>
@@ -121,6 +155,15 @@ form {
 </form>
 
 <script src="opening_hours.js" type="text/javascript"></script>
+
+
+<form id="commentsFormUpdate" name="commentsFormUpdate" action="comments.php" method="post">
+  <input type="hidden" name="formUpdate" value="1">
+  <input id="update-comments-input" name="update-comments-input" type="hidden" value="">
+  <input id="update-comments-id" name="update-comments-id" type="hidden" value="">
+</form>
+
+<script src="comments.js" type="text/javascript"></script>
 
 </body>
 </html>
