@@ -71,5 +71,5 @@ En utilisant le logiciel SQLiteStudio, la commande suivante ajoute un employé a
 > INSERT INTO employees(name, firstname, login, password, role_admin) VALUES('[firstname]', '[name]', '[email]', '[hash]', 1);
 
 ####  Mots de passe de l'actuel BDD ####
-jean@lapin.com mdp: pinpin
-vparrot@parrot.com mdp: Bentlay3008?
+Employé: jean@lapin.com mdp: pinpin
+Administrateur: vparrot@parrot.com mdp: Bentley3008?
